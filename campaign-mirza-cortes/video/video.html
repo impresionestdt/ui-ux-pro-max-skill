@@ -1,0 +1,56 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><title>Video hero 30s</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#1a0620}
+#stage{position:relative;overflow:hidden;color:#FDFBF5;font-family:'Montserrat',sans-serif;font-weight:600;background:radial-gradient(circle at 50% 40%,#4A1250 0%,#2E0A33 80%)}
+#stage.v{width:1080px;height:1920px;--u:1}
+#stage.s{width:1080px;height:1080px;--u:.8}
+canvas{position:absolute;inset:0}
+.layer{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 90px;opacity:0}
+.gold{font-family:'Cinzel',serif;font-weight:700;color:#D4AF37}
+.logo{font-family:'Cinzel',serif;color:#D4AF37;letter-spacing:.2em;font-size:calc(34px*var(--u));margin-bottom:calc(60px*var(--u))}
+.big{font-size:calc(86px*var(--u));line-height:1.15}
+.mid{font-size:calc(52px*var(--u));line-height:1.3}
+.date{font-family:'Cinzel',serif;font-weight:700;color:#D4AF37;font-size:calc(50px*var(--u));line-height:1.3;margin-top:calc(40px*var(--u))}
+.poster{width:calc(520px*var(--u));height:calc(660px*var(--u));border:3px solid #D4AF37;background:linear-gradient(160deg,#5a1763,#2E0A33);display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:calc(50px*var(--u)) 30px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.poster b{font-family:'Cinzel',serif;color:#D4AF37;font-size:calc(80px*var(--u))}
+.poster span{font-size:calc(34px*var(--u));letter-spacing:.15em}
+.poster small{font-size:calc(30px*var(--u));color:rgba(253,251,245,.85)}
+.seal{border:3px solid #D4AF37;border-radius:50%;width:calc(300px*var(--u));height:calc(300px*var(--u));display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700;color:#D4AF37;font-size:calc(42px*var(--u));line-height:1.2;margin-bottom:calc(50px*var(--u))}
+.btn{background:#D4AF37;color:#2E0A33;font-size:calc(46px*var(--u));padding:calc(34px*var(--u)) calc(60px*var(--u));border-radius:80px;margin-top:calc(30px*var(--u))}
+.btn small{display:block;font-size:calc(28px*var(--u));letter-spacing:.2em;margin-bottom:8px}
+.sub{font-size:calc(46px*var(--u));margin-top:calc(46px*var(--u))}
+</style>
+<div id="stage" class="v">
+<canvas id="c"></canvas>
+<div class="layer" id="s1"><div class="logo">ACADEMIA MIRZA CORTÉS</div><div class="gold big">117 puntajes nacionales no son casualidad.</div></div>
+<div class="layer" id="s2"><div class="logo">ACADEMIA MIRZA CORTÉS</div><div class="gold big">La excelencia que marca la diferencia</div></div>
+<div class="layer" id="s3"><div class="poster" id="p1"><span>CLASE MAGISTRAL GRATUITA</span><b>Álgebra</b><small>Matemática · Prof. Christian Monsálvez</small></div><div class="date">SÁBADO 17 DE OCTUBRE<br>15:00 a 19:00 hrs</div></div>
+<div class="layer" id="s4"><div class="poster" id="p2"><span>CLASE MAGISTRAL GRATUITA</span><b>Ondas</b><small>Física · 4 horas intensivas</small></div><div class="date">DOMINGO 18 DE OCTUBRE<br>15:00 a 19:00 hrs</div></div>
+<div class="layer" id="s5"><div class="seal">CUPOS<br>LIMITADOS</div><div class="btn" id="btn"><small>RESERVA GRATIS AHORA</small>+56 9 9650 1152</div></div>
+</div>
+<script>
+const q=new URLSearchParams(location.search);const st=document.getElementById('stage');
+st.className=q.get('f')==='1x1'?'s':'v';
+const W=1080,H=st.className==='s'?1080:1920;const c=document.getElementById('c');c.width=W;c.height=H;const x=c.getContext('2d');
+// partículas deterministas
+let seed=7;const r=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const P=Array.from({length:70},()=>({x:r()*W,y:r()*H,s:1+r()*3,v:12+r()*30,ph:r()*6.28,a:.3+r()*.6}));
+const sc=[[0,4,'s1'],[4,8,'s2'],[8,15,'s3'],[15,23,'s4'],[23,30,'s5']];
+const ease=t=>1-Math.pow(1-Math.min(1,Math.max(0,t)),3);
+function setTime(t){
+ x.clearRect(0,0,W,H);
+ for(const p of P){const y=((p.y-p.v*t)%H+H)%H;const tw=.5+.5*Math.sin(t*2+p.ph);x.globalAlpha=p.a*tw;x.fillStyle='#D4AF37';x.beginPath();x.arc(p.x+Math.sin(t+p.ph)*12,y,p.s,0,6.283);x.fill();}
+ x.globalAlpha=1;
+ for(const [a,b,id] of sc){const el=document.getElementById(id);const l=t-a;
+  let o=Math.min(ease(l/.6),ease((b-t)/.5));if(t<a||t>=b)o=0;
+  el.style.opacity=o;el.style.transform=`translateY(${(1-ease(l/.8))*40}px)`;}
+ // parallax afiches
+ for(const [id,a,b] of [['p1',8,15],['p2',15,23]]){const l=t-a,e=ease(l/.9);document.getElementById(id).style.transform=`translateY(${(1-e)*160+ (l*-6)}px) scale(${.92+.08*e+l*.004})`;}
+ // barrido dorado en escena 4
+ if(t>=15&&t<16.2){const k=(t-15)/1.2;const g=x.createLinearGradient(k*W*1.6-W*.6,0,k*W*1.6-W*.2,0);g.addColorStop(0,'rgba(212,175,55,0)');g.addColorStop(.5,'rgba(212,175,55,.35)');g.addColorStop(1,'rgba(212,175,55,0)');x.fillStyle=g;x.fillRect(0,0,W,H);}
+ document.getElementById('btn').style.transform=`scale(${1+.04*Math.sin((t-23)*6)})`;
+}
+setTime(0);window.setTime=setTime;
+</script></html>
