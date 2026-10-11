@@ -1,56 +1,177 @@
-<!doctype html><html lang="es"><meta charset="utf-8"><title>Video hero 30s</title>
+<!doctype html><html lang="es"><meta charset="utf-8"><title>Video clases magistrales</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@500;600&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{background:#1a0620}
-#stage{position:relative;overflow:hidden;color:#FDFBF5;font-family:'Montserrat',sans-serif;font-weight:600;background:radial-gradient(circle at 50% 40%,#4A1250 0%,#2E0A33 80%)}
-#stage.v{width:1080px;height:1920px;--u:1}
-#stage.s{width:1080px;height:1080px;--u:.8}
+#stage{position:relative;overflow:hidden;color:#FDFBF5;font-family:'Barlow',sans-serif;font-weight:500;width:1080px}
+#stage.v{height:1920px;--u:1}
+#stage.s{height:1080px;--u:.62}
 canvas{position:absolute;inset:0}
-.layer{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 90px;opacity:0}
-.gold{font-family:'Cinzel',serif;font-weight:700;color:#D4AF37}
-.logo{width:calc(560px*var(--u));height:auto;margin-bottom:calc(70px*var(--u))}
-.big{font-size:calc(86px*var(--u));line-height:1.15}
-.mid{font-size:calc(52px*var(--u));line-height:1.3}
-.date{font-family:'Cinzel',serif;font-weight:700;color:#D4AF37;font-size:calc(50px*var(--u));line-height:1.3;margin-top:calc(40px*var(--u))}
-.poster{width:calc(520px*var(--u));height:calc(660px*var(--u));border:3px solid #D4AF37;background:linear-gradient(160deg,#5a1763,#2E0A33);display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:calc(50px*var(--u)) 30px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
-.poster b{font-family:'Cinzel',serif;color:#D4AF37;font-size:calc(80px*var(--u))}
-.poster span{font-size:calc(34px*var(--u));letter-spacing:.15em}
-.poster small{font-size:calc(30px*var(--u));color:rgba(253,251,245,.85)}
-.seal{border:3px solid #D4AF37;border-radius:50%;width:calc(300px*var(--u));height:calc(300px*var(--u));display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700;color:#D4AF37;font-size:calc(42px*var(--u));line-height:1.2;margin-bottom:calc(50px*var(--u))}
-.btn{background:#D4AF37;color:#2E0A33;font-size:calc(46px*var(--u));padding:calc(34px*var(--u)) calc(60px*var(--u));border-radius:80px;margin-top:calc(30px*var(--u))}
-.btn small{display:block;font-size:calc(28px*var(--u));letter-spacing:.2em;margin-bottom:8px}
-.sub{font-size:calc(46px*var(--u));margin-top:calc(46px*var(--u))}
+.sc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 calc(80px*var(--u))}
+[data-t]{opacity:0;will-change:transform,opacity}
+.cond{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase}
+.gold{background:linear-gradient(180deg,#F7E3A1 0%,#D4AF37 45%,#9C7A1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 10px rgba(0,0,0,.45))}
+.kicker{font-family:'Barlow Condensed';font-weight:600;letter-spacing:.28em;text-transform:uppercase;font-size:calc(44px*var(--u))}
+.rule{width:calc(520px*var(--u));height:2px;background:linear-gradient(90deg,transparent,#D4AF37,transparent);margin:calc(30px*var(--u)) auto}
+.logo{width:calc(760px*var(--u));filter:drop-shadow(0 18px 40px rgba(0,0,0,.5))}
+.h1{font-size:calc(150px*var(--u));line-height:.95}
+.h2{font-size:calc(104px*var(--u));line-height:1}
+.h3{font-size:calc(66px*var(--u));line-height:1.05}
+.lead{font-size:calc(46px*var(--u));line-height:1.3;font-weight:600}
+.small{font-size:calc(36px*var(--u));color:rgba(253,251,245,.85)}
+.num{font-family:'Barlow Condensed';font-weight:700;font-size:calc(420px*var(--u));line-height:.9}
+.chip{background:linear-gradient(180deg,#F3D98A,#C99A2E);color:#2E0A33;border-radius:999px;padding:calc(18px*var(--u)) calc(46px*var(--u));font-family:'Barlow Condensed';font-weight:700;font-size:calc(44px*var(--u));letter-spacing:.04em;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.poster{height:calc(1000px*var(--u));border-radius:calc(18px*var(--u));border:3px solid #D4AF37;box-shadow:0 40px 90px rgba(0,0,0,.6)}
+.txt{display:flex;flex-direction:column;align-items:center}
+#stage.s #s3,#stage.s #s4{flex-direction:row;gap:56px}
+#stage.s .txt{max-width:400px;flex-shrink:0}
+#stage.s .txt .h1{font-size:80px}
+#stage.s .txt .chip{font-size:25px}
+#stage.s .txt .chip{white-space:normal;line-height:1.15}
+#stage.s #s3 .gap,#stage.s #s4 .gap{display:none}
+#stage.s .poster{height:840px}
+.card{display:flex;align-items:center;gap:calc(34px*var(--u));background:#fff;border:3px solid #D4AF37;border-radius:calc(22px*var(--u));padding:calc(26px*var(--u)) calc(36px*var(--u));width:calc(880px*var(--u));text-align:left;margin:calc(16px*var(--u)) 0;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.card img{width:calc(150px*var(--u));height:calc(150px*var(--u));object-fit:contain}
+.card b{display:block;font-family:'Barlow Condensed';font-weight:700;color:#4A1250;font-size:calc(54px*var(--u));line-height:1.05}
+.card span{display:block;color:#6b5a6e;font-size:calc(34px*var(--u));margin-top:6px;font-weight:600}
+.row{display:flex;align-items:center;gap:calc(34px*var(--u));border:2px solid rgba(212,175,55,.7);background:rgba(46,10,51,.55);border-radius:calc(18px*var(--u));padding:calc(20px*var(--u)) calc(40px*var(--u));width:calc(880px*var(--u));text-align:left;margin:calc(10px*var(--u)) 0}
+.row .d{font-family:'Barlow Condensed';font-weight:700;font-size:calc(58px*var(--u));line-height:1;border-right:2px solid #D4AF37;padding-right:calc(34px*var(--u));min-width:calc(200px*var(--u))}
+.row .d small{display:block;font-size:calc(30px*var(--u));letter-spacing:.2em;color:#D4AF37}
+.row .c b{display:block;font-family:'Barlow Condensed';font-weight:700;font-size:calc(52px*var(--u));color:#F3D98A}
+.row .c span{font-size:calc(34px*var(--u))}
+.band{font-family:'Barlow Condensed';font-weight:700;font-size:calc(52px*var(--u));letter-spacing:.06em;color:#F3D98A;border-top:2px solid rgba(212,175,55,.6);border-bottom:2px solid rgba(212,175,55,.6);padding:calc(14px*var(--u)) calc(40px*var(--u));background:rgba(46,10,51,.5)}
+.btn{display:flex;align-items:center;gap:calc(26px*var(--u));background:linear-gradient(180deg,#F3D98A,#C99A2E);color:#2E0A33;border-radius:999px;padding:calc(26px*var(--u)) calc(64px*var(--u));font-family:'Barlow Condensed';font-weight:700;font-size:calc(70px*var(--u));box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.btn svg{width:calc(70px*var(--u));height:calc(70px*var(--u))}
+.trophy{width:calc(230px*var(--u))}
+.gap{height:calc(40px*var(--u))}
+.gap2{height:calc(20px*var(--u))}
 </style>
 <div id="stage" class="v">
 <canvas id="c"></canvas>
-<div class="layer" id="s1"><img class="logo" src="../logo.png" alt="Academia Mirza Cortés"><div class="gold big">117 puntajes nacionales no son casualidad.</div></div>
-<div class="layer" id="s2"><img class="logo" src="../logo.png" alt="Academia Mirza Cortés"><div class="gold big">La excelencia que marca la diferencia</div></div>
-<div class="layer" id="s3"><div class="poster" id="p1"><span>CLASE MAGISTRAL GRATUITA</span><b>Álgebra</b><small>Matemática · Prof. Christian Monsálvez</small></div><div class="date">SÁBADO 17 DE OCTUBRE<br>15:00 a 19:00 hrs</div></div>
-<div class="layer" id="s4"><div class="poster" id="p2"><span>CLASE MAGISTRAL GRATUITA</span><b>Ondas</b><small>Física · 4 horas intensivas</small></div><div class="date">DOMINGO 18 DE OCTUBRE<br>15:00 a 19:00 hrs</div></div>
-<div class="layer" id="s5"><img class="logo" style="width:calc(420px*var(--u));margin-bottom:calc(50px*var(--u))" src="../logo.png" alt=""><div class="seal">CUPOS<br>LIMITADOS</div><div class="btn" id="btn"><small>RESERVA GRATIS AHORA</small>+56 9 9650 1152</div></div>
+
+<!-- 1 · 0–4.5 s -->
+<div class="sc" id="s1">
+  <img class="logo" data-t="0.3,4.2,scale" src="../logo.png" alt="Academia Mirza Cortés">
+  <div class="gap"></div>
+  <div class="cond gold h3" data-t="1.3,4.2,up">117 puntajes nacionales</div>
+  <div class="cond h3" data-t="1.7,4.2,up">no son casualidad</div>
+</div>
+
+<!-- 2 · 4.5–9 s -->
+<div class="sc" id="s2">
+  <div class="kicker" data-t="4.7,8.8,up">El próximo fin de semana</div>
+  <div class="rule" data-t="4.9,8.8,fade"></div>
+  <div class="num gold" data-t="5.1,8.8,scale">2</div>
+  <div class="cond gold h2" data-t="5.7,8.8,up">Clases magistrales</div>
+  <div class="cond h1" data-t="6.0,8.8,up">Gratuitas</div>
+  <div class="gap2"></div>
+  <div class="small" data-t="6.5,8.8,up">Presenciales · 4 horas intensivas</div>
+</div>
+
+<!-- 3 · 9–15.5 s Matemática -->
+<div class="sc" id="s3">
+  <div class="txt">
+  <div class="chip" data-t="9.2,15.3,down">SÁBADO 17 DE OCTUBRE · 15:00 A 19:00 HRS</div>
+  <div class="gap2"></div>
+  <div class="kicker" data-t="9.4,15.3,up">PAES</div>
+  <div class="cond gold h1" data-t="9.6,15.3,up">Matemática</div>
+  <div class="lead" data-t="9.9,15.3,up">¡Domina el eje de Álgebra!</div>
+  </div>
+  <div class="gap"></div>
+  <img class="poster" data-t="10.2,15.3,poster" src="../afiches/afiche-matematica.jpg" alt="">
+</div>
+
+<!-- 4 · 15.5–22 s Física -->
+<div class="sc" id="s4">
+  <div class="txt">
+  <div class="chip" data-t="15.7,21.8,down">DOMINGO 18 DE OCTUBRE · 15:00 A 19:00 HRS</div>
+  <div class="gap2"></div>
+  <div class="kicker" data-t="15.9,21.8,up">PAES</div>
+  <div class="cond gold h1" data-t="16.1,21.8,up">Física</div>
+  <div class="lead" data-t="16.4,21.8,up">¡Domina el eje de Ondas!</div>
+  </div>
+  <div class="gap"></div>
+  <img class="poster" data-t="16.7,21.8,poster" src="../afiches/afiche-fisica.jpg" alt="">
+</div>
+
+<!-- 5 · 22–27.5 s Qué incluye -->
+<div class="sc" id="s5">
+  <div class="kicker" data-t="22.2,27.3,up">¿Qué incluye cada clase?</div>
+  <div class="cond gold h2" data-t="22.4,27.3,up">4 horas intensivas</div>
+  <div class="rule" data-t="22.6,27.3,fade"></div>
+  <div class="card" data-t="22.9,27.3,left"><img src="assets/icon-book.png" alt=""><div><b>Cuadernillo exclusivo</b><span>100 problemas reales · editado en LaTeX</span></div></div>
+  <div class="card" data-t="23.3,27.3,right"><img src="assets/icon-target.png" alt=""><div><b>Resolución en vivo</b><span>Ejercicios resueltos paso a paso en clase</span></div></div>
+  <div class="card" data-t="23.7,27.3,left"><img src="assets/icon-brain.png" alt=""><div><b>Estrategias avanzadas</b><span>Técnicas de resolución para la PAES</span></div></div>
+  <div class="gap2"></div>
+  <div class="small" data-t="24.2,27.3,up">+ material exclusivo para asegurar tu puntaje</div>
+</div>
+
+<!-- 6 · 27.5–32.5 s Profesor + 117 -->
+<div class="sc" id="s6">
+  <div class="kicker" data-t="27.7,32.3,up">Dictadas por</div>
+  <div class="cond gold h2" data-t="27.9,32.3,up">Prof. Christian Monsálvez</div>
+  <div class="small" data-t="28.2,32.3,up">Licenciado en Ciencias Físicas<br>Magíster en Estadísticas · U. de Chile</div>
+  <div class="gap"></div>
+  <svg class="trophy" data-t="28.6,32.3,scale" viewBox="0 0 100 110"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7E3A1"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#8a6a18"/></linearGradient></defs><path d="M25 8h50v22c0 16-11 28-25 28S25 46 25 30z" fill="url(#g)"/><path d="M25 14H10c0 16 8 24 18 24M75 14h15c0 16-8 24-18 24" fill="none" stroke="url(#g)" stroke-width="5"/><rect x="44" y="58" width="12" height="18" fill="url(#g)"/><rect x="32" y="76" width="36" height="8" rx="2" fill="url(#g)"/><rect x="26" y="86" width="48" height="18" rx="3" fill="#3a1a12"/><rect x="38" y="91" width="24" height="8" fill="url(#g)"/></svg>
+  <div class="num gold" style="font-size:calc(260px*var(--u))" data-t="28.8,32.3,scale" data-count="29,30.8,117">0</div>
+  <div class="cond h3" data-t="29.2,32.3,up">Puntajes nacionales</div>
+  <div class="cond gold h3" data-t="29.4,32.3,up">entrenados</div>
+  <div class="gap2"></div>
+  <div class="small" data-t="30.2,32.3,up">La excelencia que marca la diferencia.</div>
+</div>
+
+<!-- 7 · 32.5–40 s CTA -->
+<div class="sc" id="s7">
+  <img class="logo" style="width:calc(560px*var(--u))" data-t="32.7,40.5,scale" src="../logo.png" alt="">
+  <div class="gap2"></div>
+  <div class="band" data-t="33.0,40.5,fade">»  CUPOS ESTRICTAMENTE LIMITADOS  «</div>
+  <div class="gap2"></div>
+  <div class="row" data-t="33.3,40.5,left"><div class="d"><small>SÁBADO</small>17 OCT</div><div class="c"><b>PAES Matemática</b><span>Eje de Álgebra</span></div></div>
+  <div class="row" data-t="33.6,40.5,right"><div class="d"><small>DOMINGO</small>18 OCT</div><div class="c"><b>PAES Física</b><span>Eje de Ondas</span></div></div>
+  <div class="gap2"></div>
+  <div class="lead" data-t="34.0,40.5,up">Ambos días · 15:00 a 19:00 hrs</div>
+  <div class="small" data-t="34.2,40.5,up">Av. San Lorenzo 1200, Villa Los Girasoles</div>
+  <div class="gap"></div>
+  <div class="cond gold h2" data-t="34.6,40.5,up">¡Reserva gratis ahora!</div>
+  <div class="gap2"></div>
+  <div class="btn" id="btn" data-t="35.0,40.5,scale"><svg viewBox="0 0 24 24" fill="#2E0A33"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg>+56 9 9650 1152</div>
+  <div class="gap2"></div>
+  <div class="small" data-t="35.5,40.5,up">— o —  Formulario en la descripción ↓</div>
+</div>
 </div>
 <script>
 const q=new URLSearchParams(location.search);const st=document.getElementById('stage');
 st.className=q.get('f')==='1x1'?'s':'v';
 const W=1080,H=st.className==='s'?1080:1920;const c=document.getElementById('c');c.width=W;c.height=H;const x=c.getContext('2d');
-// partículas deterministas
-let seed=7;const r=()=>(seed=(seed*16807)%2147483647)/2147483647;
-const P=Array.from({length:70},()=>({x:r()*W,y:r()*H,s:1+r()*3,v:12+r()*30,ph:r()*6.28,a:.3+r()*.6}));
-const sc=[[0,3.5,'s1'],[3.5,8.2,'s2'],[8.2,16.7,'s3'],[16.7,23.3,'s4'],[23.3,30,'s5']];
-const ease=t=>1-Math.pow(1-Math.min(1,Math.max(0,t)),3);
+let seed=11;const r=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const P=Array.from({length:110},()=>({x:r()*W,y:r()*H,s:.8+r()*2.8,v:8+r()*26,ph:r()*6.28,a:.25+r()*.7}));
+const L=Array.from({length:9},(_,i)=>({y:H*(.15+.09*i),amp:H*(.05+r()*.08),k:1.2+r()*2.2,sp:.15+r()*.35,ph:r()*6.28,a:.08+r()*.14,w:.6+r()*1.6}));
+const ease=t=>{t=Math.min(1,Math.max(0,t));return 1-Math.pow(1-t,3)};
+const els=[...document.querySelectorAll('[data-t]')].map(e=>{const [a,b,fx]=e.dataset.t.split(',');return {e,a:+a,b:+b,fx}});
+const counters=[...document.querySelectorAll('[data-count]')].map(e=>{const [a,b,n]=e.dataset.count.split(',').map(Number);return {e,a,b,n}});
+function bg(t){
+ const g=x.createRadialGradient(W/2,H*.42,0,W/2,H*.42,H*.8);g.addColorStop(0,'#5a1763');g.addColorStop(.55,'#3a0e40');g.addColorStop(1,'#1f0624');
+ x.globalCompositeOperation='source-over';x.globalAlpha=1;x.fillStyle=g;x.fillRect(0,0,W,H);
+ x.globalCompositeOperation='lighter';
+ for(const l of L){for(let j=0;j<3;j++){x.beginPath();x.strokeStyle=`rgba(212,175,55,${l.a*(1-j*.3)})`;x.lineWidth=l.w+j*.6;
+  for(let px=-20;px<=W+20;px+=12){const yy=l.y+Math.sin(px/W*Math.PI*l.k+t*l.sp+l.ph+j*.35)*l.amp+Math.sin(px/W*7+t*.5+j)*8; px<0?x.moveTo(px,yy):x.lineTo(px,yy);}x.stroke();}}
+ for(const p of P){const y=((p.y-p.v*t)%H+H)%H;const tw=.45+.55*Math.sin(t*2.2+p.ph);x.globalAlpha=p.a*tw;x.fillStyle='#F3D98A';x.beginPath();x.arc(p.x+Math.sin(t*.8+p.ph)*10,y,p.s,0,6.283);x.fill();}
+ x.globalAlpha=1;x.globalCompositeOperation='source-over';
+}
 function setTime(t){
- x.clearRect(0,0,W,H);
- for(const p of P){const y=((p.y-p.v*t)%H+H)%H;const tw=.5+.5*Math.sin(t*2+p.ph);x.globalAlpha=p.a*tw;x.fillStyle='#D4AF37';x.beginPath();x.arc(p.x+Math.sin(t+p.ph)*12,y,p.s,0,6.283);x.fill();}
- x.globalAlpha=1;
- for(const [a,b,id] of sc){const el=document.getElementById(id);const l=t-a;
-  let o=Math.min(ease(l/.6),ease((b-t)/.5));if(t<a||t>=b)o=0;
-  el.style.opacity=o;el.style.transform=`translateY(${(1-ease(l/.8))*40}px)`;}
- // parallax afiches
- for(const [id,a,b] of [['p1',8.2,16.7],['p2',16.7,23.3]]){const l=t-a,e=ease(l/.9);document.getElementById(id).style.transform=`translateY(${(1-e)*160+ (l*-6)}px) scale(${.92+.08*e+l*.004})`;}
- // barrido dorado en escena 4
- if(t>=16.7&&t<17.9){const k=(t-16.7)/1.2;const g=x.createLinearGradient(k*W*1.6-W*.6,0,k*W*1.6-W*.2,0);g.addColorStop(0,'rgba(212,175,55,0)');g.addColorStop(.5,'rgba(212,175,55,.35)');g.addColorStop(1,'rgba(212,175,55,0)');x.fillStyle=g;x.fillRect(0,0,W,H);}
- document.getElementById('btn').style.transform=`scale(${1+.04*Math.sin((t-23.3)*6)})`;
+ bg(t);
+ for(const o of els){const li=t-o.a,lo=o.b-t;let k=ease(li/.7),out=ease(lo/.45);let op=Math.min(k,out);if(t<o.a||t>o.b)op=0;
+  let tr='';const m=1-k;
+  if(o.fx==='up')tr=`translateY(${m*50}px)`;else if(o.fx==='down')tr=`translateY(${-m*50}px)`;
+  else if(o.fx==='left')tr=`translateX(${-m*160}px)`;else if(o.fx==='right')tr=`translateX(${m*160}px)`;
+  else if(o.fx==='scale')tr=`scale(${.85+.15*k})`;
+  else if(o.fx==='poster'){const e2=ease(li/1.1);tr=`perspective(1600px) translateY(${(1-e2)*220-li*8}px) rotateX(${(1-e2)*18}deg) rotate(${-2+Math.sin(li*.8)*1.2}deg) scale(${.9+.1*e2+li*.006})`;}
+  if(out<1&&op>0)tr+=` scale(${.97+.03*out})`;
+  o.e.style.opacity=op;o.e.style.transform=tr;}
+ for(const c of counters){const k=ease((t-c.a)/(c.b-c.a));c.e.textContent=Math.round(c.n*k);}
+ const b=document.getElementById('btn');if(t>35.7)b.style.transform=`scale(${1+.045*Math.sin((t-35.7)*5.5)})`;
+ // barrido dorado entre afiches
+ for(const s of [9.0,15.5,22.0]){if(t>=s-.3&&t<s+.9){const k=(t-s+.3)/1.2;const gx=k*W*1.8-W*.4;const g=x.createLinearGradient(gx-W*.3,0,gx+W*.3,H);g.addColorStop(0,'rgba(243,217,138,0)');g.addColorStop(.5,'rgba(243,217,138,.28)');g.addColorStop(1,'rgba(243,217,138,0)');x.fillStyle=g;x.fillRect(0,0,W,H);}}
 }
 setTime(0);window.setTime=setTime;
 </script></html>
