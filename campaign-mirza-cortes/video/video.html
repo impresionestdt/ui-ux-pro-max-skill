@@ -9,7 +9,7 @@ html,body{background:#1a0620}
 canvas{position:absolute;inset:0}
 .layer{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 90px;opacity:0}
 .gold{font-family:'Cinzel',serif;font-weight:700;color:#D4AF37}
-.logo{font-family:'Cinzel',serif;color:#D4AF37;letter-spacing:.2em;font-size:calc(34px*var(--u));margin-bottom:calc(60px*var(--u))}
+.logo{width:calc(560px*var(--u));height:auto;margin-bottom:calc(70px*var(--u))}
 .big{font-size:calc(86px*var(--u));line-height:1.15}
 .mid{font-size:calc(52px*var(--u));line-height:1.3}
 .date{font-family:'Cinzel',serif;font-weight:700;color:#D4AF37;font-size:calc(50px*var(--u));line-height:1.3;margin-top:calc(40px*var(--u))}
@@ -24,11 +24,11 @@ canvas{position:absolute;inset:0}
 </style>
 <div id="stage" class="v">
 <canvas id="c"></canvas>
-<div class="layer" id="s1"><div class="logo">ACADEMIA MIRZA CORTÉS</div><div class="gold big">117 puntajes nacionales no son casualidad.</div></div>
-<div class="layer" id="s2"><div class="logo">ACADEMIA MIRZA CORTÉS</div><div class="gold big">La excelencia que marca la diferencia</div></div>
+<div class="layer" id="s1"><img class="logo" src="../logo.png" alt="Academia Mirza Cortés"><div class="gold big">117 puntajes nacionales no son casualidad.</div></div>
+<div class="layer" id="s2"><img class="logo" src="../logo.png" alt="Academia Mirza Cortés"><div class="gold big">La excelencia que marca la diferencia</div></div>
 <div class="layer" id="s3"><div class="poster" id="p1"><span>CLASE MAGISTRAL GRATUITA</span><b>Álgebra</b><small>Matemática · Prof. Christian Monsálvez</small></div><div class="date">SÁBADO 17 DE OCTUBRE<br>15:00 a 19:00 hrs</div></div>
 <div class="layer" id="s4"><div class="poster" id="p2"><span>CLASE MAGISTRAL GRATUITA</span><b>Ondas</b><small>Física · 4 horas intensivas</small></div><div class="date">DOMINGO 18 DE OCTUBRE<br>15:00 a 19:00 hrs</div></div>
-<div class="layer" id="s5"><div class="seal">CUPOS<br>LIMITADOS</div><div class="btn" id="btn"><small>RESERVA GRATIS AHORA</small>+56 9 9650 1152</div></div>
+<div class="layer" id="s5"><img class="logo" style="width:calc(420px*var(--u));margin-bottom:calc(50px*var(--u))" src="../logo.png" alt=""><div class="seal">CUPOS<br>LIMITADOS</div><div class="btn" id="btn"><small>RESERVA GRATIS AHORA</small>+56 9 9650 1152</div></div>
 </div>
 <script>
 const q=new URLSearchParams(location.search);const st=document.getElementById('stage');
